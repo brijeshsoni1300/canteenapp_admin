@@ -4,13 +4,12 @@ import 'package:get/get.dart';
 
 
 class CartController extends GetxController {
-  RxList cartItems = <FoodItem>[].obs;
+  var cartItems = <FoodItem>[].obs;
   DatabaseService dbs = DatabaseService();
 
   void onInit(){
-
-     cartItems.bindStream(dbs.menuItemsList);
-     print(" cartitems: $cartItems");
+    cartItems.bindStream(dbs.menuItemsList);
+    print(" cartitems: $cartItems");
     super.onInit();
   }
 
@@ -49,5 +48,18 @@ class CartController extends GetxController {
           return;
         }
       }
+    }
+
+  void changeAvailability(Map<dynamic, dynamic> foodItem){
+    for(var item in cartItems){
+      if(item.itemName.toString() == foodItem['item_name'].toString()){
+        print("before: ");
+        print(item.isAvail);
+        print("item id ${item.id}");
+        dbs.updateAvailability(item);
+        print("after: ");
+        print(item.isAvail);
+      }
+    }
   }
 }

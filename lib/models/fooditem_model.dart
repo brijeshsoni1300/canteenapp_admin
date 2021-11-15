@@ -4,7 +4,8 @@ class FoodItem {
   String? imgUrl;
   int? quantity = 0;
   bool? isAvail;
-  FoodItem({this.itemName, this.itemPrice, this.imgUrl, this.quantity, this.isAvail});
+  String? id;
+  FoodItem({this.id, this.itemName, this.itemPrice, this.imgUrl, this.quantity, this.isAvail});
 
   FoodItem.fromJson(Map<String, dynamic> json) {
     itemName = json['item_name'];
@@ -19,6 +20,7 @@ class FoodItem {
     data['imgUrl'] = this.imgUrl;
     data['quantity']  = this.quantity;
     data['is_avail'] = this.isAvail;
+    data['id'] = this.id;
     return data;
   }
 }

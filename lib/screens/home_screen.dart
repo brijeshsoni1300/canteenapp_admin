@@ -1,6 +1,7 @@
 import 'package:canteenapp_admin/components/menu_item_card.dart';
 import 'package:canteenapp_admin/controllers/cart_controller.dart';
 import 'package:canteenapp_admin/screens/activeorder_screen.dart';
+import 'package:canteenapp_admin/screens/readyorder_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -23,7 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  static const List<Widget> _widgetOptions = <Widget>[Menu(), ActiveOrder()];
+  static const List<Widget> _widgetOptions = <Widget>[Menu(), ActiveOrder(), ReadyOrder()];
 
   @override
   Widget build(BuildContext context) {
@@ -37,10 +38,15 @@ class _HomeScreenState extends State<HomeScreen> {
             icon: Icon(Icons.home),
             label: 'Menu',
             backgroundColor: Colors.red,
+          ),  
+          BottomNavigationBarItem(
+            icon: Icon(Icons.business),
+            label: 'active order',
+            backgroundColor: Colors.green,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.business),
-            label: 'Order',
+            label: 'Ready order',
             backgroundColor: Colors.green,
           ),
         ],

@@ -1,5 +1,6 @@
 import 'package:canteenapp_admin/controllers/cart_controller.dart';
 import 'package:canteenapp_admin/screens/home_screen.dart';
+import 'package:canteenapp_admin/screens/menu_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -54,6 +55,7 @@ class _AppState extends State<App> {
     if (!_initialized) {
       return Loading();
     }
+    final cartController = Get.put(CartController());
     return MyApp();
   }
 }
@@ -62,7 +64,6 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    final cartController = Get.put(CartController());
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Auth',

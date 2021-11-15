@@ -5,7 +5,9 @@ import 'package:google_fonts/google_fonts.dart';
 
 class MenuItem extends StatefulWidget {
   Map<String, dynamic>? data;
+
   MenuItem({Key? key, Map<String, dynamic>? this.data}) : super(key: key);
+
   @override
   _MenuItemState createState() => _MenuItemState(data);
 }
@@ -21,7 +23,7 @@ class _MenuItemState extends State<MenuItem> {
   @override
   void initState() {
     print("${data['item_name']} cnt as of now is : ${data['quantity']}");
-    cnt =  data['quantity'] ;
+    cnt = data['quantity'];
     super.initState();
   }
 
@@ -75,30 +77,40 @@ class _MenuItemState extends State<MenuItem> {
                         Container(
                           width: MediaQuery.of(context).size.width * 0.5,
                           child: Align(
-                            alignment: Alignment(1.0, 0.4),
-                            child: RaisedButton(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(7),
+                              alignment: Alignment(1.0, 0.4),
+                              child: Switch(
+                                value: data['is_avail'],
+                                onChanged: (val) {
+                                  print("val : $val");
+                                  data['is_avail'] = val;
+                                  cartController.changeAvailability(data);
+                                },
+                              )
+                              // RaisedButton(
+                              //   shape: RoundedRectangleBorder(
+                              //     borderRadius: BorderRadius.circular(7),
+                              //   ),
+                              //   color: Color.fromRGBO(232, 76, 79, 1),
+                              //   onPressed: () {
+                              //     setState(() {
+                              //
+                              //
+                              //       // cnt += 1;
+                              //       // data["quantity"] = cnt;
+                              //       // print("${data['item_name']} cnt as of now is : ${data['quantity']}");
+                              //       // // print("cnt of ${data['item_name']}: $cnt" );
+                              //       //   data["quantity"] = cnt;
+                              //       //   cartController.increament(data);
+                              //
+                              //     });
+                              //   },
+                              //   child: Text(
+                              //     "+  Add",
+                              //     style: TextStyle(
+                              //         color: Colors.white, fontSize: 18),
+                              //   ),
+                              // ),
                               ),
-                              color: Color.fromRGBO(232, 76, 79, 1),
-                              onPressed: () {
-                                setState(() {
-                                  cnt += 1;
-                                  data["quantity"] = cnt;
-                                  print("${data['item_name']} cnt as of now is : ${data['quantity']}");
-                                  // print("cnt of ${data['item_name']}: $cnt" );
-                                    data["quantity"] = cnt;
-                                    cartController.increament(data);
-
-                                });
-                              },
-                              child: Text(
-                                "+  Add",
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 18),
-                              ),
-                            ),
-                          ),
                         )
                       ],
                     ))
