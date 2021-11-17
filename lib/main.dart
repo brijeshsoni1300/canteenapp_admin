@@ -6,6 +6,8 @@ import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
 
+import 'controllers/active_order_controller.dart';
+
 void main() async {
   SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(statusBarColor: Color.fromRGBO(248, 245, 242, 1)));
@@ -56,6 +58,7 @@ class _AppState extends State<App> {
       return Loading();
     }
     final cartController = Get.put(CartController());
+    final activeOrderController = Get.put(ActiveOrderController());
     return MyApp();
   }
 }
