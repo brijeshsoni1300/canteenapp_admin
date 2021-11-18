@@ -29,41 +29,22 @@ class DatabaseService {
 
   //stream for menu item END
 
-  final CollectionReference orders =
-      FirebaseFirestore.instance.collection('orders');
+  final CollectionReference active_orders =
+      FirebaseFirestore.instance.collection('active_orders');
 
   //Stream for active orders START
-
-  Stream<List<OrderList>> get listOfOrderList {
-    return orders.snapshots().map(_ListofOrderListFromSnapshot);
+  Stream<List<Order>> getActiveOrders(){
+    return active_orders.snapshots().map(_listOfActiveOrderOfUser);
   }
 
-  List<OrderList> _ListofOrderListFromSnapshot(QuerySnapshot snapshot) {
-    return snapshot.docs.map((doc) {
-      CollectionReference colRef = FirebaseFirestore.instance
-          .collection('/orders/${doc.id}/active_orders');
-      Future<QuerySnapshot> orderOfUser = FirebaseFirestore.instance
-          .collection('/orders/${doc.id}/active_orders')
-          .get()
-          ;
-     Future< List<Order>> orderlist =  orderOfUser.then((value) {
-        debugPrint("value: ${value.docs.map((e) => e.data())}");
-        return value.docs.map((doc) {
-          Map<String, dynamic> map = doc.data() as Map<String, dynamic>;
-          Order or = Order.fromJson(map);
-          return or;
-        }).toList();
-      }) ;
-      // List<Order> orlist = colRef.parameters
-
-      OrderList orderList = OrderList(
-        userName: doc['user_name'],
-        order: orderlist,
-      );
-      debugPrint("orderList: ${orderList.toString()}");
-      return orderList;
+  List<Order> _listOfActiveOrderOfUser(QuerySnapshot snapshot){
+    return snapshot.docs.map((e) {
+      Map<String, dynamic> map = e.data() as Map<String, dynamic>;
+      Order or = Order.fromJson(map);
+      return or;
     }).toList();
   }
+
 
   //Stream for active orders END
 
@@ -74,4 +55,22 @@ class DatabaseService {
       return food_items.doc(item.id).update({"is_avail": true});
     }
   }
+
+   acceptOrder(String id){
+       active_orders.doc(id).update({"status" : "REQ_ACCEPTED"});
+  }
+
+
+  rejectOrder(String id){
+    active_orders.doc(id).update({"status" : "CANCELLED"});
+  }
+
+  orderIsPrepared(String id){
+    active_orders.doc(id).update({"status": "READY"});
+  }
+
+  orderIsDelivered(String id){
+    active_orders.doc(id).update({"status": "DELIVERED"});
+  }
+
 }

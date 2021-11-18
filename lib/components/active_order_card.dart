@@ -1,3 +1,4 @@
+import 'package:canteenapp_admin/models/order_model.dart';
 import 'package:flutter/material.dart';
 
 class ActiveOrderCard extends StatefulWidget {
@@ -12,9 +13,14 @@ class ActiveOrderCard extends StatefulWidget {
 
 class _ActiveOrderCardState extends State<ActiveOrderCard> {
   var data;
+  Order? order;
 
   _ActiveOrderCardState(data) {
     this.data = data;
+    order = Order.fromJson(data as Map<String, dynamic>);
+    print("type of data['item']is: ${data['items'].runtimeType}");
+    print("order: ${order}");
+    print("data: ${data.toString()}");
   }
 
   @override
@@ -30,6 +36,18 @@ class _ActiveOrderCardState extends State<ActiveOrderCard> {
         child: Column(
           children: [
             Text("Name: ${data['user_name']}"),
+             SizedBox(
+                height: 200,
+                child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: data['items'].length,
+                    itemBuilder: (context, index) {
+                      return Card(
+                        child: Text("${data['items'][index]['item_name']}"),
+                      );
+                    }),
+              ),
+
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [

@@ -1,38 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-
-class OrderList {
-  String? userName;
-  List<Order>? order;
-
-  OrderList({this.userName, this.order});
-
-  OrderList.fromJson(Map<String, dynamic> json) {
-    userName = json['user_name'];
-    if (json['Order'] != null) {
-      order =  <Order>[];
-      json['Order'].forEach((v) {
-        order!.add( Order.fromJson(v));
-      });
-    }
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['user_name'] = this.userName;
-    if (this.order != null) {
-      data['Order'] = this.order!.map((v) => v.toJson()).toList();
-    }
-    return data;
-  }
-}
-
 class Order {
   List<Item>? items;
   Timestamp? timestamp;
+  String? uid;
   String? status;
+  String? orderid;
+  String? userName;
 
-  Order({this.items, this.timestamp, this.status});
+  Order({this.items, this.timestamp, this.status, this.uid, this.orderid, this.userName});
 
   Order.fromJson(Map<String, dynamic> json) {
     if (json['items'] != null) {
@@ -43,6 +19,9 @@ class Order {
     }
     timestamp = json['timestamp'];
     status = json['status'];
+    uid = json['uid'];
+    orderid = json["order_id"];
+    userName = json["user_name"];
   }
 
   Map<String, dynamic> toJson() {
@@ -52,6 +31,9 @@ class Order {
     }
     data['timestamp'] = this.timestamp;
     data['status'] = this.status;
+    data['uid'] = this.uid;
+    data['order_id'] = this.orderid;
+    data['user_name'] = this.userName;
     return data;
   }
 
@@ -59,7 +41,7 @@ class Order {
   String toString() {
     // TODO: implement toString
     // print("items: [${items.toString()}],status: $status");
-    return "items: [${items.toString()}],status: $status";
+    return "items: ${items.toString()},status: $status,uid: ${uid}, order_id:${orderid}, user_name:${userName}";
   }
 }
 

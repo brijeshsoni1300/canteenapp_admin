@@ -5,11 +5,11 @@ import 'package:get/get.dart';
 
 
 class ActiveOrderController extends GetxController {
-  var listOfOrderList = <OrderList>[].obs;
+  var listOfOrderList = <Order>[].obs;
   DatabaseService dbs = DatabaseService();
 
   void onInit() {
-    listOfOrderList.bindStream(dbs.listOfOrderList);
+    listOfOrderList.bindStream(dbs.getActiveOrders());
     debugPrint(" listOfOrderList: ${listOfOrderList.value}");
     super.onInit();
   }
