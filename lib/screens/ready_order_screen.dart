@@ -20,10 +20,10 @@ class ReadyOrder extends StatelessWidget {
             itemCount: activeOrderController.listOfOrderList.value.length,
             itemBuilder: (context, index) {
               return activeOrderController.listOfOrderList[index].status ==
-                  'READY'
+                      'READY'
                   ? HistoryCard(
-                  data:
-                  activeOrderController.listOfOrderList[index].toJson())
+                      data:
+                          activeOrderController.listOfOrderList[index].toJson())
                   : Container();
             })));
   }
@@ -115,7 +115,6 @@ class HistoryCard extends StatelessWidget {
                   Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 25, vertical: 5),
-
                       child: Container(
                         width: double.infinity,
                         child: ElevatedButton(
@@ -129,8 +128,14 @@ class HistoryCard extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text("Delivered",style: TextStyle(fontSize: 22,fontWeight: FontWeight.bold),),
-                              SizedBox(width: 10,),
+                              Text(
+                                "Delivered",
+                                style: TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
                               Icon(Icons.tag_faces_rounded)
                             ],
                           ),

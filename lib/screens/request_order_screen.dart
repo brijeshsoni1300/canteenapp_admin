@@ -122,6 +122,7 @@ class HistoryCard extends StatelessWidget {
                             onPressed: () {
                               //TODO: ACCEPT ORDER
                               dbs.acceptOrder(data!["order_id"]);
+
                             },
                             style: ElevatedButton.styleFrom(
                               primary: Colors.green,
@@ -129,8 +130,15 @@ class HistoryCard extends StatelessWidget {
                             child: Row(
                               children: [
                                 Icon(Icons.done_all_outlined),
-                                SizedBox(width: 5,),
-                                Text("Accept Order",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                Text(
+                                  "Accept Order",
+                                  style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold),
+                                ),
                               ],
                             ),
                           ),
@@ -145,8 +153,15 @@ class HistoryCard extends StatelessWidget {
                             child: Row(
                               children: [
                                 Icon(Icons.cancel),
-                                SizedBox(width: 5,),
-                                Text("Reject Order",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                Text(
+                                  "Reject Order",
+                                  style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold),
+                                ),
                               ],
                             ),
                           ),

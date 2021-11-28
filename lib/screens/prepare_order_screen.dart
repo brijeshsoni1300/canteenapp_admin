@@ -121,6 +121,7 @@ class HistoryCard extends StatelessWidget {
                           onPressed: () {
                             //TODO: ACCEPT ORDER
                             dbs.orderIsPrepared(data!["order_id"]);
+                            dbs.sendPushMessage(data!["fcmtoken"]);
                           },
                           style: ElevatedButton.styleFrom(
                             primary: Colors.green,
@@ -131,7 +132,7 @@ class HistoryCard extends StatelessWidget {
                               Text(
                                 "Order mill Prepared",
                                 style: TextStyle(
-                                    fontSize: 22, fontWeight: FontWeight.bold),
+                                    fontSize: 20, fontWeight: FontWeight.bold),
                               ),
                               SizedBox(
                                 width: 10,
